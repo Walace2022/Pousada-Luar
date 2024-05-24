@@ -19,6 +19,10 @@ internal class Reserva
         {
             throw new ArgumentNullException("Não há hóspedes para serem cadastrados na reserva.");
         }
+        if(pessoas.Count > Suite.Capacidade)
+        {
+            throw new ArgumentOutOfRangeException("Não há capacidade suficiente para esse tanto de hóspedes na suíte selecionada.");
+        }
         Hospedes = pessoas;
     }
 
