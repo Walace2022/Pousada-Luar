@@ -8,8 +8,8 @@ internal class Reserva
 
     public Reserva(List<Pessoa> hospedes, Suite suite, int diasReservados)
     {
-        CadastrarHospedes(hospedes);
         CadastrarSuite(suite);
+        CadastrarHospedes(hospedes);
         DiasReservados = diasReservados;
     }
 
@@ -17,11 +17,11 @@ internal class Reserva
     {
         if (pessoas.Count == 0)
         {
-            throw new ArgumentNullException("Não há hóspedes para serem cadastrados na reserva.");
+            throw new Exception("Não há hóspedes para serem cadastrados na reserva.");
         }
         if(pessoas.Count > Suite.Capacidade)
         {
-            throw new ArgumentOutOfRangeException("Não há capacidade suficiente para esse tanto de hóspedes na suíte selecionada.");
+            throw new Exception($"A suíte {Suite.TipoSuite} não tem capacidade para {Hospedes.Count} hóspedes.");
         }
         Hospedes = pessoas;
     }
@@ -49,6 +49,17 @@ internal class Reserva
             return valorTotal * 0.9M;
         }
         return valorTotal;
+    }
+
+    public void DetalhesReserva()
+    {
+        Console.WriteLine("Os hóspedes:");
+        foreach(Pessoa p in Hospedes)
+        {
+            Console.WriteLine($" - {p.Nome} {p.Sobrenome}");
+        }
+        Console.WriteLine($"Estão em uma suíte {Suite.TipoSuite}.");
+        Console.WriteLine($"Com reserva para {DiasReservados} dias.");
     }
 
 
