@@ -21,7 +21,7 @@ internal class Reserva
         }
         if(pessoas.Count > Suite.Capacidade)
         {
-            throw new Exception($"A suíte {Suite.TipoSuite} não tem capacidade para {Hospedes.Count} hóspedes.");
+            throw new Exception($"A suíte {Suite.TipoSuite} não tem capacidade para {pessoas.Count} hóspedes.");
         }
         Hospedes = pessoas;
     }
@@ -36,11 +36,6 @@ internal class Reserva
 
     }
 
-    public int ObterQuantidadeHospedes()
-    {
-        return Hospedes.Count;
-    }
-
     public decimal CalcularValorDiaria()
     {
         decimal valorTotal = DiasReservados * Suite.ValorDiaria;
@@ -53,13 +48,13 @@ internal class Reserva
 
     public void DetalhesReserva()
     {
-        Console.WriteLine("Os hóspedes:");
+        Console.WriteLine($"Os {Hospedes.Count} hóspedes:");
         foreach(Pessoa p in Hospedes)
         {
             Console.WriteLine($" - {p.Nome} {p.Sobrenome}");
         }
         Console.WriteLine($"Estão em uma suíte {Suite.TipoSuite}.");
-        Console.WriteLine($"Com reserva para {DiasReservados} dias.");
+        Console.WriteLine($"Com reserva para {DiasReservados} dias no valor de {CalcularValorDiaria():C2}.");
     }
 
 
